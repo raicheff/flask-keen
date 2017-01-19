@@ -16,8 +16,8 @@ setup(
     author='Boris Raicheff',
     author_email='b@raicheff.com',
     url='https://github.com/raicheff/flask-keen',
-    install_requires=['flask', 'keen'],
-    py_modules=['flask_keen'],
+    install_requires=('flask', 'keen'),
+    py_modules=('flask_keen',),
 )
 
 
