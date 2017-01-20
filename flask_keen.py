@@ -35,15 +35,13 @@ class Keen(object):
 
     def init_app(self, app):
         project_id = app.config.get('KEEN_PROJECT_ID')
-        read_key = app.config.get('KEEN_READ_KEY')
-        write_key = app.config.get('KEEN_WRITE_KEY')
-        if not all((project_id, read_key, write_key)):
-            logger.warning('KEEN credentials not set')
+        if project_id is None:
+            logger.warning('KEEN_PROJECT_ID not set')
             return
         self.client = KeenClient(
             project_id=project_id,
-            read_key=read_key,
-            write_key=write_key,
+            write_key=app.config.get('KEEN_WRITE_KEY'),
+            read_key=app.config.get('KEEN_READ_KEY'),
         )
 
     def __getattr__(self, name):
