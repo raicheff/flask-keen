@@ -6,12 +6,9 @@
 #
 
 
-import logging
+import warnings
 
 from keen.client import KeenClient
-
-
-logger = logging.getLogger('Flask-Keen')
 
 
 class Keen(object):
@@ -36,7 +33,7 @@ class Keen(object):
     def init_app(self, app):
         project_id = app.config.get('KEEN_PROJECT_ID')
         if project_id is None:
-            logger.warning('KEEN_PROJECT_ID not set')
+            warnings.warn('KEEN_PROJECT_ID not set', RuntimeWarning, stacklevel=2)
             return
         self.client = KeenClient(
             project_id=project_id,
